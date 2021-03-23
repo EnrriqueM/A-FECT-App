@@ -1,25 +1,54 @@
-import logo from './logo.svg';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
+import Login from './components/Login/login.js';
+import Navbar from './components/Navbar/Navbar.js';
+import Register from './components/Register/Register.js';
+import Home from './components/Home/Home';
+import UserNavbar from './components/Navbar/UserNavBar.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component { 
+  state =
+  {
+    isLoggedIn: true,
+    person: []
+  }
+
+  loginHandler = (event) =>
+  {
+    console.log(event);
+  }
+
+  render() 
+  {
+    return (
+      <div className="App">
+        { this.state.isLoggedIn ? <UserNavbar /> : <Navbar /> }
+        
+        <Router>
+            {/* A <Switch> looks through its children <Route>s and
+                renders the first one that matches the current URL. */}
+            <Switch>
+              <Route path="/login" component={Login}>
+                <Login />
+              </Route>
+              <Route path="/Register">
+                <Register />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+        </Router>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
