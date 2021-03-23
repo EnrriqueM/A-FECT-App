@@ -13,7 +13,7 @@ const Home = () =>
                     left: '0',
                     minHeight: '300px'}}
                     className="d-block w-100"
-                    src="https://pixabay.com/get/g8bff3ef8541d5d3d22e8e3163c25c9dc9b126bd4608f28701212a2047a479cf12f64f232ba7a3a76ee3e9348e908de00_1920.jpg"
+                    src="https://cdn.pixabay.com/photo/2014/07/31/22/50/photographer-407068_1280.jpg"
                     alt="First slide"
                     />
                     <Carousel.Caption>
