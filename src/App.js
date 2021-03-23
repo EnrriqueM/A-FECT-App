@@ -15,8 +15,8 @@ import UserNavbar from './components/Navbar/UserNavBar.js';
 class App extends React.Component { 
   state =
   {
-    isLoggedIn: true,
-    person: []
+    isLoggedIn: false,
+    userSession: []
   }
 
   loginHandler = (event) =>
