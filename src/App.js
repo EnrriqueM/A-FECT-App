@@ -10,18 +10,37 @@ import Navbar from './components/Navbar/Navbar.js';
 import Register from './components/Register/Register.js';
 import Home from './components/Home/Home';
 import UserNavbar from './components/Navbar/UserNavBar.js';
+import Logout from './components/Logout/Logout.js';
 
 
 class App extends React.Component { 
   state =
   {
-    isLoggedIn: true,
-    userSession: []
+    isLoggedIn: false,
+    userSessionId: null
   }
 
-  loginHandler = (event) =>
+  componentDidMount()
   {
-    console.log(event);
+    //Get User from Storage
+    const loggedInUser = localStorage.getItem("isSessionUser");
+    if (loggedInUser) {
+      const userSessionId = localStorage.getItem("userIs");
+      this.setState( () => ({isLoggedIn: loggedInUser, userSessionId: userSessionId}));
+    }
+  }
+
+  loginHandler = (success, id) =>
+  {
+    if(success)
+    {
+      this.setState({isLoggedIn: success});
+
+      // store the user in localStorage
+      localStorage.setItem('isSessionUser', true);
+      // store the user in localStorage
+      localStorage.setItem('userId', id);
+    }
   }
 
   render() 
@@ -34,15 +53,17 @@ class App extends React.Component {
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
-              <Route path="/login" component={Login}>
-                <Login />
+              <Route path="/login" >
+                <Login login={this.loginHandler} />
               </Route>
-              <Route path="/Register">
-                <Register />
+              <Route path="/Register" component={Register} />
+              <Route path="/logout" >
+                <Logout />
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                 <Home />
               </Route>
+              <Route render={() => <h1>Not Found!</h1>} />
             </Switch>
         </Router>
       </div>
