@@ -12,10 +12,10 @@ import Home from './components/Home/Home';
 import UserNavbar from './components/Navbar/UserNavBar.js';
 
 
-class App extends React.Component { 
+class App extends React.Component {
   state =
   {
-    isLoggedIn: false,
+    isLoggedIn: true,
     userSession: []
   }
 
@@ -42,6 +42,9 @@ class App extends React.Component {
               </Route>
               <Route path="/">
                 <Home />
+              </Route>
+              <Route path="/NewPost">
+                <ViewPost /> 
               </Route>
             </Switch>
         </Router>
