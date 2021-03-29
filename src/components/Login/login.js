@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Form, Spinner, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import './Login.css';
 
 class Login extends Component
 {
     constructor(props)
     {
         super(props);
-        this.state = {btnPress: false, successfulLogin: false};
+        this.state = {btnPress: false, successfulLogin: false, showErrMsg: false};
         this.state = {unInput: ""};
         this.state = {pwdInput: ""};
 
@@ -59,9 +60,17 @@ class Login extends Component
             }
         })
         .catch(err => {
-            console.log(err.response.status);
-            if(err.response.status === 404)
+
+            //First catch if there wasn't a response
+            //Usually happens when a server is down
+            if(err.response == null)
             {
+                console.log("No connection established");
+            }
+            //Otherwise handle the error according to the HTTP Status code
+            else if(err.response.status === 404)
+            {
+                //TODO: Display message to try again
                 console.log("User Not Found");
             }
             else
@@ -69,11 +78,13 @@ class Login extends Component
                 console.log(err.response.status);
                 console.log("Unexpected error");
             }
+
+            //Show an messag to user
+            this.setState({showErrMsg: true});
         })
         .finally(() => {
             this.setState(state => ({btnPress: !state.btnPress}));
         });
-        
     }
 
     render()
@@ -81,29 +92,31 @@ class Login extends Component
         //Redirect to dashboard if user is successfully logged in
         if(this.state.successfulLogin)
         {
-            console.log("Here");
             return <Redirect to="/Dashboard" />
         }
 
         return (
-        <div>
-            <Form>
+        <div className="loginContent">
+            <h3>Sign In</h3>
+            <hr />
+            <Form onSubmit={this.submitBtnHandler}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Username" onChange={this.onTextChange}/>
+                    <Form.Control required size="lg" type="text" placeholder="Enter Username" onChange={this.onTextChange} />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={this.onTextChange}/>
+                    <Form.Control required size="lg" type="password" placeholder="Password" onChange={this.onTextChange}/>
                 </Form.Group>
+                <p><a href="/ResetPassword">Forgot your password?</a></p>
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Remember me" />
                 </Form.Group>
                 {
                 !this.state.btnPress 
                 ?
-                    <Button variant="primary" type="submit" onClick={this.submitBtnHandler}>
+                    <Button variant="primary" type="submit">
                         Log In
                     </Button>
                 :
@@ -115,10 +128,13 @@ class Login extends Component
                         role="status"
                         aria-hidden="true"
                         />
-                        Logging In...
+                        Signing In...
                     </Button>
                 }
+                <p>Don't have an account? <a href="/Register">Register</a></p>
             </Form>
+            {this.state.showErrMsg ? <h5 className="InvalidMsg">Username and password do not match. Try again</h5> : false}
+            
         </div>
         )
     }

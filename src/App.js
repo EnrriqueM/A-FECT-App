@@ -11,6 +11,8 @@ import Register from './components/Register/Register.js';
 import Home from './components/Home/Home';
 import UserNavbar from './components/Navbar/UserNavBar.js';
 import Logout from './components/Logout/Logout.js';
+import ResetPassword from './components/ResetPassword/ResetPassword.js';
+import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword.js';
 
 
 class App extends React.Component { 
@@ -57,6 +59,12 @@ class App extends React.Component {
                 <Login login={this.loginHandler} />
               </Route>
               <Route path="/Register" component={Register} />
+              <Route path="/ResetPassword" >
+                <ResetPassword />
+              </Route>
+              <Route path="/api/reset_password/:token" >
+                <ChangePassword />
+              </Route>
               <Route path="/logout" >
                 <Logout />
               </Route>
