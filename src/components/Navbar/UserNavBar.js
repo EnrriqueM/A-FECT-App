@@ -26,6 +26,7 @@ class userNavbar extends React.Component
                             <Nav.Link href="/Dashboard">Dashboard</Nav.Link>
                             <Nav.Link href="/NewPost">New Post</Nav.Link>
                             <Nav.Link href="/About">About</Nav.Link>
+                            <Nav.Link href="/Logout">Sign Out</Nav.Link>
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

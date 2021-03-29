@@ -1,0 +1,19 @@
+.registerContent
+{
+    padding: 15px;
+    width: 75%;
+    margin: auto;
+}
+
+.InvalidMsg
+{
+    color: red;
+}
+
+@media screen and (max-width: 900px) 
+{
+  .registerContent
+  {
+  	width: 100%;
+  }
+}
