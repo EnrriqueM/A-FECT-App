@@ -14,7 +14,7 @@ const ResetPassword = () =>
 
         // Send a POST request
         //Attempt to Register -  HTTP Request
-        const login = axios.post('http://localhost:8080/api/reset_password/forgot_password/'+ email)
+        axios.post('/api/reset_password/forgot_password/'+ email)
         .then(response => {
             if(response.status === 201)
             {

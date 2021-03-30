@@ -5,6 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+
+/* index.js first place file to load.
+* Therefore, it is good place to set any defaults
+* axios.default - object that set ups defualts for all request that are being sent
+* bsaeUrl - other paths will be append to this base URL
+* can also set other defaults such as headers
+*/
+axios.defaults.baseURL = 'http://localhost:8080';
 
 ReactDOM.render(
   <React.StrictMode>

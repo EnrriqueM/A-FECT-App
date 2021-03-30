@@ -21,8 +21,14 @@ const Register = () =>
     const [pwdDidCheck, setPwdDidCheck] = useState(false);
     const[pwd, setPwd] = useState("");
 
+    //Check if form was submitted
     const [formSubmitted, setFormSubmitted]  = useState(false);
+
+    //If user is already logged in, redirect to dashboard
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    //If user successful registerd, redirect to login
+    const [successRegister, setSuccessRegister] = useState(false);
 
     // Similar to componentDidMount and componentDidUpdate:
     //Check if there is already a user signed in
@@ -40,6 +46,11 @@ const Register = () =>
 
       }, []);
 
+    /*
+    * Called when user hits submit button
+    * Trys not create a new user
+    * update setSuccessRegister if successful
+    * */
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         
@@ -49,9 +60,6 @@ const Register = () =>
             event.preventDefault();
             event.stopPropagation();
         }
-
-        
-
         //setValidated(true);
         if(!unVal || !emailVal)
         {
@@ -67,13 +75,13 @@ const Register = () =>
         const pwd = form[4].value;
 
         //Attempt to Register -  HTTP Request
-        const login = axios.post('http://localhost:8080/api/user', 
+        const login = axios.post('/api/user', 
         {username: un, password: pwd, email: email, firstname: firstname, lastname: lastname})
         .then(response => {
             if(response.status === 201)
             {
-                console.log("SUCCESS")
-                setIsLoggedIn(true);
+                console.log("SUCCESS");
+                setSuccessRegister(true);
             }
         })
         .catch(err => {
@@ -118,7 +126,7 @@ const Register = () =>
         }
 
         //Make an HTTP Request
-        const login = axios.post('http://localhost:8080/api/user/checkEmail/' + email)
+        const login = axios.post('/api/user/checkEmail/' + email)
         .then(response => {
             if(response.status === 200)
             {
@@ -177,7 +185,7 @@ const Register = () =>
         }
         
         //Make an HTTP Request
-        const login = axios.post('http://localhost:8080/api/user/checkUsername/' + un)
+        const login = axios.post('/api/user/checkUsername/' + un)
         .then(response => {
             if(response.status === 200)
             {
@@ -244,6 +252,10 @@ const Register = () =>
     if(isLoggedIn)
     {
         return <Redirect to="/Dashboard" />
+    }
+    else if (successRegister)
+    {
+        return <Redirect to="/Login" />
     }
 
     return (

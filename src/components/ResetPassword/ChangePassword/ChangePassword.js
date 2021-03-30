@@ -1,82 +1,80 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Col, Button, InputGroup, Spinner } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect, useParams } from "react-router-dom";
+import PasswordForm from './Contents/PasswordForm.js';
+import InvalidToken from './Contents/InvalidToken.js';
+import SuccessPage from './Contents/SuccessPage.js';
+import './ChangePassword.css';
 
 const ChangePassword = () =>
 {
-    const [pwdValid, setPwdValid] = useState(false);
-    const [pwdDidCheck, setPwdDidCheck] = useState(false);
-    const[pwd, setPwd] = useState("");
+    
+    //Get token from param
     let { token } = useParams();
 
+    //Token validation
+    //True when recieved server response
+    const [receivedServerResponse, setServerResponse] = useState(false);
+    //True if token is valid
+    const [isValidToken, setValidToken] = useState(false);
+    //True after user press submit btn
+    const [submitBtnPressed, setBtnPressed] = useState(false);
+
     useEffect(() => {
-        console.log("In use effect");
-        console.log(token);
-        //TODO: Check if token is valid
+         //Check if token is valid /api/reset_password/validateToken
+        axios.post('/api/reset_password/validateToken', {token: token})
+        .then(response => {
+            if(response.status === 200)
+            {
+                //If token accepted, update state to show form
+                setValidToken(true);
+                //Store user id
+                console.log(response.data);
+            }
+        })
+        .catch(err => {
 
-
+            //First catch if there wasn't a response
+            //Usually happens when a server is down
+            if(err.response == null)
+            {
+                console.log("No connection established");
+            }
+            //Otherwise handle the error according to the HTTP Status code
+            else
+            {
+                console.log(err.response.status);
+                console.log(err.response.data);
+            }
+        })
+        .finally(() => {
+            setServerResponse(true);
+        });
       }, []);
 
-    const handleSubmit = (event) => {
-        //const form = event.currentTarget;
-        console.log("Form Submitted");
+      const submitHandler = () =>
+      {
+        console.log("Form submitted");
+        setBtnPressed(true);
+      }
 
-        //TODO REDIRECT TO success page
-    };
-
-    const updatePwd = event =>
+    if(!receivedServerResponse)
     {
-        setPwd(event.currentTarget.value);
-        if(event.currentTarget.value === "" || event.currentTarget.value === " ")
-        {
-            setPwdValid(false);
-        }
+        return <Spinner animation="border" variant="danger" className="loading" />
     }
-
-    const checkPassword = event =>
+    else if(submitBtnPressed)
     {
-        if(event.currentTarget.value !== pwd)
-        {
-            setPwdValid(false);
-        }
-        else
-        {  
-            setPwdValid(true);
-        }
-
-        setPwdDidCheck(true);
+        return <SuccessPage />
     }
-
-    return (<div>
-        <Form onSubmit={handleSubmit} method="post">
-            <Form.Row>
-                <Form.Group as={Col} md="3" controlId="validationCustom04">
-                <Form.Label>Password</Form.Label>
-                <Form.Control name="password" type="password" placeholder="Password" required onInput={updatePwd}/>
-                <Form.Control.Feedback type="invalid">
-                    Please enter a new password.
-                </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="3" controlId="validationCustom05">
-                <Form.Label>Repeat Password</Form.Label>
-                <Form.Control isValid={pwdValid} isInvalid={!pwdValid && pwdDidCheck} type="password" placeholder="Repeat Password" required onInput={checkPassword}/>
-                <Form.Control.Feedback type="invalid">
-                    Passwords do not match
-                </Form.Control.Feedback>
-                </Form.Group>
-            </Form.Row>
-            <Form.Group>
-                <a href="/termsAndConditions">Read Terms and Conditions</a>
-                <Form.Check
-                required
-                label="Agree to terms and conditions"
-                feedback="You must agree before submitting."
-                />
-            </Form.Group>
-                <Button type="submit">Reset Password</Button>
-            </Form>
-    </div>)
+    else if(isValidToken)
+    {
+        return <PasswordForm handleSubmit={submitHandler} token={token}/>
+    }
+    else
+    {
+        return <InvalidToken />
+    }
 }
 
 export default ChangePassword;

@@ -51,10 +51,11 @@ class Login extends Component
         this.setState(state => ({btnPress: !state.btnPress}));
 
         //Make an HTTP Request
-        const login = axios.post('http://localhost:8080/api/user/login', {username: this.state.unInput, password: this.state.pwdInput})
+        const login = axios.post('/api/user/login', {username: this.state.unInput, password: this.state.pwdInput})
         .then(response => {
             if(response.status === 200)
             {
+                //If successful login, send status and userId back to App.js
                 this.props.login(true, response.data);
                 this.setState({successfulLogin: !this.state.successfulLogin})
             }
