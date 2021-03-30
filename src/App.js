@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import './App.css';
-import Login from './components/Login/login.js';
+import Login from './components/Login/Login.js';
 import Navbar from './components/Navbar/Navbar.js';
 import Register from './components/Register/Register.js';
 import Home from './components/Home/Home';
@@ -13,15 +13,18 @@ import UserNavbar from './components/Navbar/UserNavBar.js';
 import Logout from './components/Logout/Logout.js';
 import ResetPassword from './components/ResetPassword/ResetPassword.js';
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword.js';
+
 import ViewPost from './components/ViewPosts/ViewPosts.js';
 import Create from "./components/CreatePost/Create";
+
+import NotFound from './components/NotFound/NotFound.js';
+
 
 class App extends React.Component {
   state =
   {
 
     isLoggedIn: false,
-    userSession: [],
     userSessionId: null
     
   }
@@ -34,8 +37,11 @@ class App extends React.Component {
       const userSessionId = localStorage.getItem("userId");
       this.setState( () => ({isLoggedIn: loggedInUser, userSessionId: userSessionId}));
     }
+
+    
   }
 
+  //CALLBACK function, recives status (boolean) and userId (int)
   loginHandler = (success, id) =>
   {
     if(success)
@@ -66,7 +72,7 @@ class App extends React.Component {
               <Route path="/ResetPassword" >
                 <ResetPassword />
               </Route>
-              <Route path="/api/reset_password/:token" >
+              <Route path="/reset_password/:token" >
                 <ChangePassword />
               </Route>
               <Route path="/logout" >
@@ -82,6 +88,7 @@ class App extends React.Component {
 
               <Route render={() => <h1>Not Found!</h1>} />
 
+              <Route render={() => <NotFound />} />
             </Switch>
         </Router>
       </div>

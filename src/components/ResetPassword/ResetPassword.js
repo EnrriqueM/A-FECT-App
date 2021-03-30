@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Col, Button, InputGroup, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import { Redirect } from "react-router-dom";
+import EmailSent from './EmailSent.js';
 import "./ResetPassword.css";
 
 const ResetPassword = () =>
 {
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const formHandler = (event) =>
     {
@@ -14,7 +15,7 @@ const ResetPassword = () =>
 
         // Send a POST request
         //Attempt to Register -  HTTP Request
-        const login = axios.post('http://localhost:8080/api/reset_password/forgot_password/'+ email)
+        axios.post('/api/reset_password/forgot_password/'+ email)
         .then(response => {
             if(response.status === 201)
             {
@@ -42,9 +43,14 @@ const ResetPassword = () =>
             }
         })
         .finally(() => {
-            
+            setFormSubmitted(true);
         });
     };
+
+    if(formSubmitted)
+    {
+        return <EmailSent />
+    }
 
     return (
     <div className="rpContent">

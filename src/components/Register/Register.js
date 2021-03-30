@@ -21,8 +21,14 @@ const Register = () =>
     const [pwdDidCheck, setPwdDidCheck] = useState(false);
     const[pwd, setPwd] = useState("");
 
+    //Check if form was submitted
     const [formSubmitted, setFormSubmitted]  = useState(false);
+
+    //If user is already logged in, redirect to dashboard
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    //If user successful registerd, redirect to login
+    const [successRegister, setSuccessRegister] = useState(false);
 
     // Similar to componentDidMount and componentDidUpdate:
     //Check if there is already a user signed in
@@ -40,6 +46,11 @@ const Register = () =>
 
       }, []);
 
+    /*
+    * Called when user hits submit button
+    * Trys not create a new user
+    * update setSuccessRegister if successful
+    * */
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         
@@ -49,9 +60,6 @@ const Register = () =>
             event.preventDefault();
             event.stopPropagation();
         }
-
-        
-
         //setValidated(true);
         if(!unVal || !emailVal)
         {
@@ -67,13 +75,13 @@ const Register = () =>
         const pwd = form[4].value;
 
         //Attempt to Register -  HTTP Request
-        const login = axios.post('http://localhost:8080/api/user', 
+        const login = axios.post('/api/user', 
         {username: un, password: pwd, email: email, firstname: firstname, lastname: lastname})
         .then(response => {
             if(response.status === 201)
             {
-                console.log("SUCCESS")
-                setIsLoggedIn(true);
+                console.log("SUCCESS");
+                setSuccessRegister(true);
             }
         })
         .catch(err => {
@@ -118,7 +126,7 @@ const Register = () =>
         }
 
         //Make an HTTP Request
-        const login = axios.post('http://localhost:8080/api/user/checkEmail/' + email)
+        const login = axios.post('/api/user/checkEmail/' + email)
         .then(response => {
             if(response.status === 200)
             {
@@ -177,7 +185,7 @@ const Register = () =>
         }
         
         //Make an HTTP Request
-        const login = axios.post('http://localhost:8080/api/user/checkUsername/' + un)
+        const login = axios.post('/api/user/checkUsername/' + un)
         .then(response => {
             if(response.status === 200)
             {
@@ -245,6 +253,10 @@ const Register = () =>
     {
         return <Redirect to="/Dashboard" />
     }
+    else if (successRegister)
+    {
+        return <Redirect to="/Login" />
+    }
 
     return (
         <div className="registerContent">
@@ -252,7 +264,7 @@ const Register = () =>
             <hr />
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Row>
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Group as={Col} md="6" controlId="validationCustom01">
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                     required
@@ -261,7 +273,8 @@ const Register = () =>
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
+
+                <Form.Group as={Col} md="6" controlId="validationCustom02">
                 <Form.Label>Last name</Form.Label>
                 <Form.Control
                     required
@@ -270,7 +283,10 @@ const Register = () =>
                 />
                 </Form.Group>
 
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+            </Form.Row>
+            <Form.Row>
+
+                <Form.Group as={Col} md="6" controlId="validationCustomUsername">
                 <Form.Label>Username</Form.Label>
                 <InputGroup >
                     <InputGroup.Prepend>
@@ -290,31 +306,37 @@ const Register = () =>
                     </Form.Control.Feedback>
                 </InputGroup>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
+
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
                 <Form.Label>Email</Form.Label>
+                <InputGroup >
                 <Form.Control isValid={emailVal} isInvalid={!emailVal && emailDidVal} type="email" placeholder="email@example.com" required onBlur={checkEmail} />
                 {showEmailSpinner ? <Spinner animation="border" variant="primary" /> : false}
                 <Form.Control.Feedback type="invalid">
                     Email already in use.
                 </Form.Control.Feedback>
-
+                </InputGroup>
                 </Form.Group>
-                <Form.Group as={Col} md="3" controlId="validationCustom04">
+
+            </Form.Row>
+            <Form.Row>
+
+                <Form.Group as={Col} md="6" controlId="validationCustom04">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" required onInput={updatePwd}/>
                 <Form.Control.Feedback type="invalid">
                     Please enter a password.
                 </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="3" controlId="validationCustom05">
+
+                <Form.Group as={Col} md="6" controlId="validationCustom05">
                 <Form.Label>Repeat Password</Form.Label>
                 <Form.Control isValid={pwdValid} isInvalid={!pwdValid && pwdDidCheck} type="password" placeholder="Repeat Password" required onInput={checkPassword}/>
                 <Form.Control.Feedback type="invalid">
                     Passwords do not match
                 </Form.Control.Feedback>
                 </Form.Group>
+                
             </Form.Row>
             <Form.Group>
                 <a href="/termsAndConditions">Read Terms and Conditions</a>
