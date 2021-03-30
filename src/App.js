@@ -13,18 +13,17 @@ import UserNavbar from './components/Navbar/UserNavBar.js';
 import Logout from './components/Logout/Logout.js';
 import ResetPassword from './components/ResetPassword/ResetPassword.js';
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword.js';
-
+import ViewPost from './components/ViewPosts/ViewPosts.js';
+import Create from "./components/CreatePost/Create";
 
 class App extends React.Component {
   state =
   {
-<<<<<<< HEAD
-    isLoggedIn: true,
-    userSession: []
-=======
+
     isLoggedIn: false,
+    userSession: [],
     userSessionId: null
->>>>>>> origin/enrique
+    
   }
 
   componentDidMount()
@@ -32,7 +31,7 @@ class App extends React.Component {
     //Get User from Storage
     const loggedInUser = localStorage.getItem("isSessionUser");
     if (loggedInUser) {
-      const userSessionId = localStorage.getItem("userIs");
+      const userSessionId = localStorage.getItem("userId");
       this.setState( () => ({isLoggedIn: loggedInUser, userSessionId: userSessionId}));
     }
   }
@@ -76,13 +75,13 @@ class App extends React.Component {
               <Route exact path="/">
                 <Home />
               </Route>
-<<<<<<< HEAD
+
               <Route path="/NewPost">
-                <ViewPost /> 
+                <Create /> 
               </Route>
-=======
+
               <Route render={() => <h1>Not Found!</h1>} />
->>>>>>> origin/enrique
+
             </Switch>
         </Router>
       </div>
