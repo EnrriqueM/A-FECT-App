@@ -15,8 +15,8 @@ import ResetPassword from './components/ResetPassword/ResetPassword.js';
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword.js';
 
 import ViewPost from './components/ViewPosts/ViewPosts.js';
-import Create from "./components/CreatePost/Create";
-
+import Create from "./components/CreatePost/Create.js";
+import Dash from "./components/Dashboard/Dash.js";
 import NotFound from './components/NotFound/NotFound.js';
 
 
@@ -84,6 +84,14 @@ class App extends React.Component {
 
               <Route path="/NewPost">
                 <Create /> 
+              </Route>
+
+              <Route path="/ViewPosts">
+                <ViewPost /> 
+              </Route>
+
+              <Route path="/Dashboard">
+                <Dash /> 
               </Route>
 
               <Route render={() => <h1>Not Found!</h1>} />

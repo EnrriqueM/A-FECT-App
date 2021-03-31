@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./style.css"
 
-class ViewPost extends Component {
+class Dash extends Component {
     // State will apply to the posts object which is set to loading by default
     constructor() {
         super()
         this.state = {
+            userId: localStorage.getItem("userId"),
             posts: [],
             isLoading: true,
             errors: null
@@ -18,7 +19,7 @@ class ViewPost extends Component {
         console.log("In view post");
       axios
         // This is where the data is hosted
-        .get("api/post/allposts")
+        .get(`api/post/user/${this.state.userId}`)
         // Once we get a response and store data, let's change the loading state
         .then(response => {
           this.setState({
@@ -38,7 +39,7 @@ class ViewPost extends Component {
       const { isLoading, posts } = this.state;
       return (
         <React.Fragment>
-          <h2>All Posts</h2>
+          <h2>My Posts</h2>
           <hr></hr>
           <div>
             {!isLoading ? (
@@ -55,7 +56,7 @@ class ViewPost extends Component {
                             <div className="app">
                                 <div className="post">
                                     <div className="user">
-                                        <h5 class="user-name"><span className='user-span'>{user.firstname} {user.lastname}</span></h5>
+                                        <h5><span className='user-span'>{user.firstname} {user.lastname}</span></h5>
                                         <p><span className='user-span'>@{user.username}</span></p>
                                     </div>
                                     <div className="ptitle">
@@ -65,7 +66,7 @@ class ViewPost extends Component {
                                         <p>{message}</p>
                                     </div>
 
-                                    <h5 className="like">Likes | View Post</h5>
+                                    <h5 className="like">Likes:</h5>
 
                                     <button className="addLike" className>Add a like</button>
 
@@ -89,4 +90,4 @@ class ViewPost extends Component {
     }
   }
 
-  export default ViewPost;
+  export default Dash;
