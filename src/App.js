@@ -14,22 +14,24 @@ import Logout from './components/Logout/Logout.js';
 import ResetPassword from './components/ResetPassword/ResetPassword.js';
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword.js';
 import NotFound from './components/NotFound/NotFound.js';
+import SearchResults from './components/SearchResuls/SearchResults.js';
 
 
 class App extends React.Component { 
   state =
   {
     isLoggedIn: false,
-    userSessionId: null
+    userSessionId: 87
   }
 
   componentDidMount()
   {
     //Get User from Storage
     const loggedInUser = localStorage.getItem("isSessionUser");
-    if (loggedInUser) {
-      const userSessionId = localStorage.getItem("userId");
-      this.setState( () => ({isLoggedIn: loggedInUser, userSessionId: userSessionId}));
+    if (loggedInUser) 
+    {
+      const userId = localStorage.getItem("userId");
+      this.setState({isLoggedIn: loggedInUser, userSessionId: userId});
     }
 
     
@@ -55,10 +57,15 @@ class App extends React.Component {
       <div className="App">
         { this.state.isLoggedIn ? <UserNavbar /> : <Navbar /> }
         
+        
         <Router>
+        
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
+              <Route path="/search/:query">
+                <SearchResults />
+              </Route>
               <Route path="/login" >
                 <Login login={this.loginHandler} />
               </Route>
