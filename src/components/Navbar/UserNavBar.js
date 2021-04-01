@@ -6,11 +6,6 @@ class userNavbar extends React.Component
 {
     state = {searchText: ""};
 
-    constructor(props)
-    {
-        super(props);
-    }
-
     routeHandler = route => () => {
         this.props.history.push({ pathname: route });
       };
@@ -20,9 +15,18 @@ class userNavbar extends React.Component
        */
       searchInputHandler = (event) => {
         this.setState({
-          searchText: event.target.value
-        });
-        console.log(this.state.searchText);
+            searchText: event.target.value
+          });
+      };
+
+      handleSearchSubmit = () => {
+        if (this.state.searchText) 
+        {
+            history().push('/searchFirstnames/' +this.state.searchText)
+        } 
+        else {
+          alert("Please enter some search text!");
+        }
       };
 
     render()
@@ -52,7 +56,7 @@ class userNavbar extends React.Component
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.searchInputHandler} value={this.state.searchText}/>
-                            <Button variant="outline-light" type="submit" onClick={() => history().push('/search/' +this.state.searchText)}>Search</Button>
+                            <Button variant="outline-light" type="submit" onClick={this.handleSearchSubmit} >Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
@@ -60,5 +64,7 @@ class userNavbar extends React.Component
         );
     }
 }
+
+//onClick={() => history().push('/searchFirstnames/' +this.state.searchText)}
 
 export default userNavbar;

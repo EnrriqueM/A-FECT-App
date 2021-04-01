@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Col, Button, InputGroup, Spinner } from 'react-bootstrap';
-import axios from 'axios';
 import { Redirect, useParams } from "react-router-dom";
+import axios from 'axios';
+import { Form, Spinner } from 'react-bootstrap';
 import ViewData from './ViewData/ViewData.js';
 import './SearchResults.css';
 
-const SearchResults = (props) =>
+const SearchUsernames = props =>
 {
     let { query } = useParams();
     const [data, setData] = useState([]);
     const [recievedData, setRecievedData] = useState(false);
-    const searchUsernamesUri = "/searchUsernames/" + query;
+    const searchFirstnamesUri = "/searchFirstnames/" + query;
     const searchPostsUri = "/searchPosts/" + query;
 
     useEffect(() =>
     {
         const searchQuery = query ? query : "";
 
-        axios.get('/api/user/searchFirstnames?firstname=' + searchQuery)
+        axios.get('/api/user/searchUsernames?username=' + searchQuery)
         .then(response => {
             if(response.status === 200)
             {
@@ -43,19 +43,21 @@ const SearchResults = (props) =>
         })
     }, [])
 
-   return (<div className="Results">
-       <Form>
-        {['radio'].map((type) => (
-            <div key={`inline-${type}`} className="mb-3">
-            <Form.Check inline disabled label="Firstname" type={type} id={`inline-${type}-1`} defaultChecked/>
-            <label><a href={searchUsernamesUri}><Form.Check inline type={type} id={`inline-${type}-2`} />Usernames</a></label>
-            <label><a href={searchPostsUri}><Form.Check inline type={type} id={`inline-${type}-3`} /> Posts</a></label>
-            
-            </div>
-        ))}
-        </Form>
-        {recievedData ? <ViewData data={data} className="ResultSet"/> : <Spinner animation="border" variant="primary" /> }
-   </div>)
+    return(
+        <div className="Results">
+             <Form>
+                {['radio'].map((type) => (
+                    <div key={`inline-${type}`} className="mb-3">
+                    <label><a href={searchFirstnamesUri}><Form.Check inline type={type} id={`inline-${type}-1`} />Firstnames</a></label>
+                    <Form.Check inline disabled label="Usernames" type={type} id={`inline-${type}-2`} defaultChecked/>
+                    <label><a href={searchPostsUri}><Form.Check inline type={type} id={`inline-${type}-3`} /> Posts</a></label>
+                    
+                    </div>
+                ))}
+            </Form>
+            {recievedData ? <ViewData data={data} /> : <Spinner animation="border" variant="primary" /> }
+        </div>
+    );
 }
 
-export default SearchResults;
+export default SearchUsernames;

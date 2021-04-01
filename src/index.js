@@ -13,7 +13,7 @@ import axios from 'axios';
 * bsaeUrl - other paths will be append to this base URL
 * can also set other defaults such as headers
 */
-axios.defaults.baseURL = 'http://ec2-3-15-41-69.us-east-2.compute.amazonaws.com:8080';
+axios.defaults.baseURL = 'http://localhost:8080';
 
 ReactDOM.render(
   <React.StrictMode>

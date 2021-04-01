@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PasswordForm from './Contents/PasswordForm.js';
 import InvalidToken from './Contents/InvalidToken.js';
 import SuccessPage from './Contents/SuccessPage.js';

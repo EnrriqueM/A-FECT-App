@@ -1,0 +1,33 @@
+.ResultSet
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    column-count: 2;
+}
+
+.Results
+{
+    margin: auto;
+    padding: 15px;
+}
+
+.Results a
+{
+    text-decoration: none;
+    color: black;
+}
+
+.Results a::after
+{
+    text-decoration: none;
+    color: black;
+}
+
+.Results a:hover
+{
+    text-decoration: none;
+    color: black;
+}

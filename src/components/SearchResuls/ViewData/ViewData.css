@@ -1,0 +1,16 @@
+.User {
+    width: 250px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 25px auto;
+    box-sizing: border-box;
+    border-radius: 25px;
+  }
+  
+  
+  .Name {
+    margin: 16px 0;
+    color: #ccc;
+  }

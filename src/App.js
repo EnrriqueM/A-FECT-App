@@ -14,7 +14,10 @@ import Logout from './components/Logout/Logout.js';
 import ResetPassword from './components/ResetPassword/ResetPassword.js';
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword.js';
 import NotFound from './components/NotFound/NotFound.js';
-import SearchResults from './components/SearchResuls/SearchResults.js';
+import SearchFirstnames from './components/SearchResuls/SearchResults.js';
+import SearchUsernames from './components/SearchResuls/SearchUsernames.js';
+import SearchPosts from './components/SearchResuls/SearchPosts.js';
+import ViewData from "./components/SearchResuls/ViewData/ViewData";
 
 
 class App extends React.Component { 
@@ -33,8 +36,6 @@ class App extends React.Component {
       const userId = localStorage.getItem("userId");
       this.setState({isLoggedIn: loggedInUser, userSessionId: userId});
     }
-
-    
   }
 
   //CALLBACK function, recives status (boolean) and userId (int)
@@ -63,8 +64,14 @@ class App extends React.Component {
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
-              <Route path="/search/:query">
-                <SearchResults />
+              <Route path="/searchFirstnames/:query">
+                <SearchFirstnames />
+              </Route>
+              <Route path="/searchUsernames/:query">
+                <SearchUsernames  />
+              </Route>
+              <Route path="/searchPosts/:query">
+                <SearchPosts  />
               </Route>
               <Route path="/login" >
                 <Login login={this.loginHandler} />
