@@ -1,40 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Create extends Component {
     constructor(props)
     {
         super(props);
-        this.state = {userId: 0};
-        this.state = {title: ""};
-        this.state = {message: ""};
+        this.state = {
+          userId: localStorage.getItem("userId"),
+          title: "",
+          message: "",
+          submitted: false
+        };
     }
-
-    //Upon Mounting, check if there is already a user logged in
-    //If so redirct to Dashboard
-    componentDidMount()
-    {
-        //Get User from Storage
-        console.log(this.state.userId);
-
-        const loggedInUser = localStorage.getItem("isSessionUser");
-        if (loggedInUser) 
-        {
-          const id = localStorage.getItem("userId");
-           // this.setState({successfulLogin: !this.state.successfulLogin});
-          //  this.setState({
-          //   userId: localStorage.getItem("userId")
-          // });
-          
-          this.setState({
-            userId: id
-          });
-        } else {
-            //Re-rout
-            
-        }
-    }
-
 
     onTitleChange = e => {
       this.setState({
@@ -50,16 +28,27 @@ class Create extends Component {
 
       handleSubmit = e => {
         e.preventDefault();
-        window.location.href = "/ViewPosts";
+
+        this.setState({
+          submitted: true
+        });
+
+        const {userId, title, message} = this.state;
    axios
-      .post('/api/post/addpost', {userId:this.state.userId, title:this.state.title, message:this.state.message})
+      .post('/api/post/addpost', {userId:userId, title:title, message:message})
       .then(res => console.log(res))
       .catch(err => console.log(err));
   };
 
     render() {
-        return (
-
+      const { userId, title, message, submitted } = this.state;
+      if(userId){
+        if(submitted){
+          return (
+            <Redirect to="/ViewPosts" />
+          );
+        } else {
+          return (
             <div>
                 
                 <div className="container">
@@ -76,15 +65,13 @@ class Create extends Component {
                                 </div>
                                 <hr></hr>
                                 <div>
-                                <input type="text" className="form-control" placeholder="Post title..." value={this.state.title}
-            onChange={this.onTitleChange} required/>
+                                <input type="text" className="form-control" placeholder="Post title..." onChange={this.onTitleChange} required/>
                                 </div>
                                 <div>
                                     <h4>Content</h4>
                                 </div>
                                 <div className="form-floating">
-                                    <textarea className="form-control" placeholder="Post content..." value={this.state.message}
-            onChange={this.onBodyChange} required></textarea>
+                                    <textarea className="form-control" placeholder="Post content..." onChange={this.onBodyChange} maxLength="254" required></textarea>
                                 </div>
                                 <br></br>
                                 <button type="submit" className="btn btn-primary">Create Post</button>
@@ -99,7 +86,16 @@ class Create extends Component {
                 </div>
 
             </div>
-        );
+          );
+        }
+      } else {
+        return (
+          <Redirect to="/" />
+        )
+      }
+
+
+        
     }
 }
 

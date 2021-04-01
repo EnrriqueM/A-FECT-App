@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./style.css"
+import Post from "../Posts/Post"
+import { Redirect } from "react-router";
 
 class Dash extends Component {
     // State will apply to the posts object which is set to loading by default
@@ -32,61 +33,36 @@ class Dash extends Component {
     }
     // Let's our app know we're ready to render the data
     componentDidMount() {
-      this.getPosts();
+        this.getPosts();
     }
     // Putting that data to use
     render() {
-      const { isLoading, posts } = this.state;
-      return (
-        <React.Fragment>
-          <h2>My Posts</h2>
-          <hr></hr>
-          <div>
-            {!isLoading ? (
-              posts.map(post => {
-                  console.log(post);
-                const { post_id, title, message, user } = post;
-                return (
-
-                    <div className="row" key={post_id}>
-                        <div className="col-2">
-                        </div>
-                        <div className="col-8">
-
-                            <div className="app">
-                                <div className="post">
-                                    <div className="user">
-                                        <h5><span className='user-span'>{user.firstname} {user.lastname}</span></h5>
-                                        <p><span className='user-span'>@{user.username}</span></p>
-                                    </div>
-                                    <div className="ptitle">
-                                        <h4>{title}</h4>
-                                    </div>
-                                    <div className="pmessage"> 
-                                        <p>{message}</p>
-                                    </div>
-
-                                    <h5 className="like">Likes:</h5>
-
-                                    <button className="addLike" className>Add a like</button>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="col-2">
-                        </div>
-                    </div>
-
-                  
-                );
-              })
-            ) : (
-              <p>Loading...</p>
-            )}
-          </div>
-        </React.Fragment>
-      );
+      const { isLoading, posts, userId } = this.state;
+      if(userId){
+        return (
+          <React.Fragment>
+            <h2>My Posts</h2>
+            <hr></hr>
+            <div>
+              {!isLoading ? (
+                posts.map(post => {
+                    console.log(post);
+                  const { post_id, title, message, user } = post;
+                  return (
+                    <Post title={title} message={message} user={user} post_id={post_id} />
+                  );
+                })
+              ) : (
+                <p>Loading...</p>
+              )}
+            </div>
+          </React.Fragment>
+        );
+      } else {
+        return (
+          <Redirect to="/" />
+        );
+      }
     }
   }
 
