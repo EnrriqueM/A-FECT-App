@@ -18,6 +18,10 @@ import ViewPost from './components/ViewPosts/ViewPosts.js';
 import Create from "./components/CreatePost/Create.js";
 import Dash from "./components/Dashboard/Dash.js";
 import NotFound from './components/NotFound/NotFound.js';
+import SearchFirstnames from './components/SearchResuls/SearchResults.js';
+import SearchUsernames from './components/SearchResuls/SearchUsernames.js';
+import SearchPosts from './components/SearchResuls/SearchPosts.js';
+import ViewData from "./components/SearchResuls/ViewData/ViewData";
 
 
 class App extends React.Component {
@@ -25,20 +29,20 @@ class App extends React.Component {
   {
 
     isLoggedIn: false,
+
     userSessionId: null
-    
+
   }
 
   componentDidMount()
   {
     //Get User from Storage
     const loggedInUser = localStorage.getItem("isSessionUser");
-    if (loggedInUser) {
-      const userSessionId = localStorage.getItem("userId");
-      this.setState( () => ({isLoggedIn: loggedInUser, userSessionId: userSessionId}));
+    if (loggedInUser) 
+    {
+      const userId = localStorage.getItem("userId");
+      this.setState({isLoggedIn: loggedInUser, userSessionId: userId});
     }
-
-    
   }
 
   //CALLBACK function, recives status (boolean) and userId (int)
@@ -61,10 +65,21 @@ class App extends React.Component {
       <div className="App">
         { this.state.isLoggedIn ? <UserNavbar /> : <Navbar /> }
         
+        
         <Router>
+        
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
+              <Route path="/searchFirstnames/:query">
+                <SearchFirstnames />
+              </Route>
+              <Route path="/searchUsernames/:query">
+                <SearchUsernames  />
+              </Route>
+              <Route path="/searchPosts/:query">
+                <SearchPosts  />
+              </Route>
               <Route path="/login" >
                 <Login login={this.loginHandler} />
               </Route>

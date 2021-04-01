@@ -1,8 +1,34 @@
 import React from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { createBrowserHistory as history} from 'history';
 
 class userNavbar extends React.Component
 {
+    state = {searchText: ""};
+
+    routeHandler = route => () => {
+        this.props.history.push({ pathname: route });
+      };
+
+      /**
+       * Updates search text state evrytime the search bar changes
+       */
+      searchInputHandler = (event) => {
+        this.setState({
+            searchText: event.target.value
+          });
+      };
+
+      handleSearchSubmit = () => {
+        if (this.state.searchText) 
+        {
+            history().push('/searchFirstnames/' +this.state.searchText)
+        } 
+        else {
+          alert("Please enter some search text!");
+        }
+      };
+
     render()
     {
         return (
@@ -30,8 +56,8 @@ class userNavbar extends React.Component
                             <Nav.Link href="/Logout">Sign Out</Nav.Link>
                         </Nav>
                         <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-light">Search</Button>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.searchInputHandler} value={this.state.searchText}/>
+                            <Button variant="outline-light" type="submit" onClick={this.handleSearchSubmit} >Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
@@ -39,5 +65,7 @@ class userNavbar extends React.Component
         );
     }
 }
+
+//onClick={() => history().push('/searchFirstnames/' +this.state.searchText)}
 
 export default userNavbar;

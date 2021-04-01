@@ -51,7 +51,7 @@ class Login extends Component
         this.setState(state => ({btnPress: !state.btnPress}));
 
         //Make an HTTP Request
-        const login = axios.post('/api/user/login', {username: this.state.unInput, password: this.state.pwdInput})
+        axios.post('/api/user/login', {username: this.state.unInput, password: this.state.pwdInput})
         .then(response => {
             if(response.status === 200)
             {

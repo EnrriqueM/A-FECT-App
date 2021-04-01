@@ -75,7 +75,7 @@ const Register = () =>
         const pwd = form[4].value;
 
         //Attempt to Register -  HTTP Request
-        const login = axios.post('/api/user', 
+        axios.post('/api/user', 
         {username: un, password: pwd, email: email, firstname: firstname, lastname: lastname})
         .then(response => {
             if(response.status === 201)
@@ -126,7 +126,7 @@ const Register = () =>
         }
 
         //Make an HTTP Request
-        const login = axios.post('/api/user/checkEmail/' + email)
+        axios.post('/api/user/checkEmail/' + email)
         .then(response => {
             if(response.status === 200)
             {
@@ -185,7 +185,7 @@ const Register = () =>
         }
         
         //Make an HTTP Request
-        const login = axios.post('/api/user/checkUsername/' + un)
+        axios.post('/api/user/checkUsername/' + un)
         .then(response => {
             if(response.status === 200)
             {
