@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import Likes from './Likes';
+import Comment from './Comment';
 import "./style.css"
 
 class Post extends Component {
@@ -23,16 +24,14 @@ class Post extends Component {
                                 <p><span className='user-span'>@{this.props.user.username}</span></p>
                             </div>
                             <div className="ptitle">
-                                <h4>{this.props.title}</h4>
+                                <h4>{this.props.title} </h4>
                             </div>
                             <div className="pmessage"> 
                                 <p>{this.props.message}</p>
                             </div>
 
-                            <h5 className="like">Likes | View Post</h5>
-
-                            <button className="addLike" className>Add a like</button>
-
+                            <Likes postId={this.props.post_id} />
+                            <Comment />
                         </div>
                     </div>
 

@@ -17,6 +17,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 20px;
+    margin-bottom: 20px;
   }
 
   .user {
@@ -48,4 +49,21 @@
 
   .user-span {
     color: rgb(56, 0, 0)
+  }
+
+  #comment {
+    width: 500px;
+    height: 40px;
+  }
+
+  .icon-svg{
+    width: 4vmin;
+    height: 3vmin;
+  }
+
+  .btn {
+    border: none;
+    outline:none;
+    margin-left: 10px;
+    margin-right: 10px;
   }

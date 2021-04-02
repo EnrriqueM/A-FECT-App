@@ -10,7 +10,8 @@ class Create extends Component {
           userId: localStorage.getItem("userId"),
           title: "",
           message: "",
-          submitted: false
+          submitted: false,
+          allPosts: []
         };
     }
 
@@ -36,7 +37,11 @@ class Create extends Component {
         const {userId, title, message} = this.state;
    axios
       .post('/api/post/addpost', {userId:userId, title:title, message:message})
-      .then(res => console.log(res))
+      .then(res => {
+        this.setState({
+          allPosts: res.data
+        })
+      })
       .catch(err => console.log(err));
   };
 
@@ -45,7 +50,7 @@ class Create extends Component {
       if(userId){
         if(submitted){
           return (
-            <Redirect to="/ViewPosts" />
+            <Redirect to="/ViewPosts" allPosts={this.state.allPosts}/>
           );
         } else {
           return (
