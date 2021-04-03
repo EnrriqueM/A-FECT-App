@@ -17,7 +17,6 @@ class ViewPost extends Component {
     
     // Now we're going to make a request for data using axios
     getPosts() {
-        console.log("In view post");
       axios
         // This is where the data is hosted
         .get("api/post/allposts")

@@ -17,6 +17,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 20px;
+    margin-bottom: 20px;
   }
 
   .user {
@@ -48,4 +49,32 @@
 
   .user-span {
     color: rgb(56, 0, 0)
+  }
+
+  #comment {
+    width: 500px;
+    height: 40px;
+  }
+
+  .icon-svg{
+    width: 4vmin;
+    height: 3vmin;
+  }
+
+  .btn {
+    border: none;
+    outline:none;
+    margin:10px
+  }
+
+  #submit {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .comment{
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: solid 1px rgb(204, 204, 204);
+    margin-top: 12px;
   }
