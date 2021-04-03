@@ -21,7 +21,7 @@ import NotFound from './components/NotFound/NotFound.js';
 import SearchFirstnames from './components/SearchResuls/SearchResults.js';
 import SearchUsernames from './components/SearchResuls/SearchUsernames.js';
 import SearchPosts from './components/SearchResuls/SearchPosts.js';
-import ViewData from "./components/SearchResuls/ViewData/ViewData";
+import User from './components/User/User.js'
 
 
 class App extends React.Component {
@@ -79,6 +79,9 @@ class App extends React.Component {
               </Route>
               <Route path="/searchPosts/:query">
                 <SearchPosts  />
+              </Route>
+              <Route path="/user/:userId">
+                <User  />
               </Route>
               <Route path="/login" >
                 <Login login={this.loginHandler} />

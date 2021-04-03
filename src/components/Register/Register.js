@@ -35,7 +35,6 @@ const Register = () =>
     useEffect(() => {
         //Get User from Storage
         const loggedInUser = localStorage.getItem("isSessionUser");
-        console.log("in use effect: " + loggedInUser);
 
         //Redirecct to dashboard if user if already signed in
         if (loggedInUser)
@@ -53,13 +52,14 @@ const Register = () =>
     * */
     const handleSubmit = (event) => {
         const form = event.currentTarget;
+        event.preventDefault();
         
-        setFormSubmitted(true)
+        /*setFormSubmitted(true)
         if (form.checkValidity() === false) 
         {
             event.preventDefault();
             event.stopPropagation();
-        }
+        }*/
         //setValidated(true);
         if(!unVal || !emailVal)
         {
@@ -262,7 +262,7 @@ const Register = () =>
         <div className="registerContent">
             <h3>Create Your AFect Account</h3>
             <hr />
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
             <Form.Row>
                 <Form.Group as={Col} md="6" controlId="validationCustom01">
                 <Form.Label>First name</Form.Label>
@@ -341,8 +341,7 @@ const Register = () =>
             <Form.Group>
                 <a href="/termsAndConditions">Read Terms and Conditions</a>
                 <Form.Check
-                required
-                label="Agree to terms and conditions"
+                label="By clicking Register, you Agree to terms and conditions"
                 feedback="You must agree before submitting."
                 />
             </Form.Group>

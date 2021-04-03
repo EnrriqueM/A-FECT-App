@@ -55,6 +55,7 @@ const SearchUsernames = props =>
                     </div>
                 ))}
             </Form>
+            <hr />
             {recievedData ? <ViewData data={data} /> : <Spinner animation="border" variant="primary" /> }
         </div>
     );

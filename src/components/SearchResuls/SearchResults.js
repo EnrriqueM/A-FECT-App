@@ -54,6 +54,7 @@ const SearchResults = (props) =>
             </div>
         ))}
         </Form>
+        <hr />
         {recievedData ? <ViewData data={data} className="ResultSet"/> : <Spinner animation="border" variant="primary" /> }
    </div>)
 }

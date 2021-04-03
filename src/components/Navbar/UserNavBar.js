@@ -50,7 +50,7 @@ class userNavbar extends React.Component
                         <Nav className="mr-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/Dashboard">Dashboard</Nav.Link>
-                            <Nav.Link href="/ViewPosts">View All Posts</Nav.Link>
+                            <Nav.Link href="/ViewPosts">All Posts</Nav.Link>
                             <Nav.Link href="/NewPost">New Post</Nav.Link>
                             <Nav.Link href="/About">About</Nav.Link>
                             <Nav.Link href="/Logout">Sign Out</Nav.Link>
