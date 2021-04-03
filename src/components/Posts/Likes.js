@@ -90,7 +90,6 @@ class Likes extends Component {
                 <div>
                     Like<button className="btn" type="submit"onClick={this.addlike.bind(this)}><AiFillLike className="icon-svg"/></button>{(this.state.likes) ? this.state.likes : 0}
                     
-                    
                 </div>
             ); 
         }

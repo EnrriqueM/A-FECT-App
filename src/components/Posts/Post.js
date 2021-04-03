@@ -21,7 +21,7 @@ class Post extends Component {
                         <div className="post">
                             <div className="user">
                                 <h5 class="user-name"><span className='user-span'>{this.props.user.firstname} {this.props.user.lastname}</span></h5>
-                                <p><span className='user-span'>@{this.props.user.username}</span></p>
+                                <p><span className='user-span'><b>@{this.props.user.username}</b></span></p>
                             </div>
                             <div className="ptitle">
                                 <h4>{this.props.title} </h4>
@@ -31,7 +31,7 @@ class Post extends Component {
                             </div>
 
                             <Likes postId={this.props.post_id} />
-                            <Comment />
+                            <Comment postId={this.props.post_id}/>
                         </div>
                     </div>
 

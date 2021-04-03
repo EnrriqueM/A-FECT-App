@@ -64,6 +64,17 @@
   .btn {
     border: none;
     outline:none;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin:10px
+  }
+
+  #submit {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .comment{
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: solid 1px rgb(204, 204, 204);
+    margin-top: 12px;
   }
