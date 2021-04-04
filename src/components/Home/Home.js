@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Card } from 'react-bootstrap';
 
 const Home = () =>
 {
@@ -17,8 +17,8 @@ const Home = () =>
                     alt="First slide"
                     />
                     <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h3>Sign Up Today</h3>
+                    <p>Create a free account and start creating Afects today!</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item style={{height: '700px'}}>
@@ -29,8 +29,8 @@ const Home = () =>
                     />
 
                     <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3>What are Afects?</h3>
+                    <p>There your thoughts that you share with the world.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item style={{height: '700px'}}>
@@ -42,11 +42,23 @@ const Home = () =>
                     />
 
                     <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    <h3>Just Another Social Media Site?</h3>
+                    <p>No, we are better! How? Sign up and find out.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
+
+            <Card className="bg-dark text-white" style={{height: "300px"}}>
+                <Card.Img src="https://cdn.pixabay.com/photo/2020/10/04/09/57/bird-feather-5625806_1280.jpg" alt="Card image" />
+                <Card.ImgOverlay>
+                    <Card.Title>Share your AFects today</Card.Title>
+                    <Card.Text>
+                    Your thoughts can affect those around. Share positive and
+                    additional content. This content is a little bit longer.
+                    </Card.Text>
+                    <Card.Text>Last updated 3 mins ago</Card.Text>
+                </Card.ImgOverlay>
+            </Card>
         </div>
     )
 }

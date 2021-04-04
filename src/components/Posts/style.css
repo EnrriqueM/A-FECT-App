@@ -1,0 +1,80 @@
+
+  .app {
+    min-height: 40vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .post {
+    min-height: 300px;
+    width: 600px;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .user {
+    border-bottom: solid #dad6d6 1px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .ptitle {
+    width: 100%;
+  }
+
+  .pmessage {
+    border-bottom: solid #d1d1d1 1px;
+    text-align: left;
+    min-height: 100px;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .like{
+   
+  }
+
+
+  .addLike {
+
+  }
+
+  .user-span {
+    color: rgb(56, 0, 0)
+  }
+
+  #comment {
+    width: 500px;
+    height: 40px;
+  }
+
+  .icon-svg{
+    width: 4vmin;
+    height: 3vmin;
+  }
+
+  .btn {
+    border: none;
+    outline:none;
+    margin:10px
+  }
+
+  #submit {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .comment{
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: solid 1px rgb(204, 204, 204);
+    margin-top: 12px;
+  }
