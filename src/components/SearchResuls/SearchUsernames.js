@@ -50,7 +50,7 @@ const SearchUsernames = props =>
                     <div key={`inline-${type}`} className="mb-3">
                     <label><a href={searchFirstnamesUri}><Form.Check inline type={type} id={`inline-${type}-1`} />Firstnames</a></label>
                     <Form.Check inline disabled label="Usernames" type={type} id={`inline-${type}-2`} defaultChecked/>
-                    <label><a href={searchPostsUri}><Form.Check inline type={type} id={`inline-${type}-3`} /> Posts</a></label>
+                    <label><a href={searchPostsUri}><Form.Check inline type={type} id={`inline-${type}-3`} /> Posts Title</a></label>
                     
                     </div>
                 ))}
