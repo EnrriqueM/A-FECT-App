@@ -1,9 +1,9 @@
 
 # A-FECT-App
-**Social Media Web App**
-A-FECT is new social media platform for sharing message,  thoughts, etc...
-Each message a user posts is called an “AFect”. A user can create an accout, add posts, find friends, add comments to posts, like and unlike posts.
-=======
+Social Media Web App
+==========
+A-FECT is new social media platform for sharing message,  thoughts, etc..., Each message a user posts is called an “AFect”. A user can create an accout, add posts, find friends, add comments to posts, like and unlike posts.
+
 # Technologies Used
 
 Java - version 1.8.0_281
