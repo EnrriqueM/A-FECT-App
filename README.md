@@ -1,7 +1,37 @@
 
 # A-FECT-App
-Social Media Web App
+**Social Media Web App**
+A-FECT is new social media platform for sharing message,  thoughts, etc...
+Each message a user posts is called an “AFect”. A user can create an accout, add posts, find friends, add comments to posts, like and unlike posts.
 =======
+# Technologies Used
+
+Java - version 1.8.0_281
+
+Maven - version 2.0
+
+Spring - version 3.6.3
+
+React - version 17.0.2
+
+Axios - version 0.21.1
+
+
+# Features
+
+List of features ready and TODOs for future development
+
+Register account feature
+
+Add Post feature
+
+Add Comment and Like feature
+
+
+# To-do list:
+
+Upload Profile picture to be done
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
