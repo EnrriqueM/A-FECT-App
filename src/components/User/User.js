@@ -1,4 +1,4 @@
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import {  Spinner } from 'react-bootstrap';
 import axios from 'axios';
@@ -40,7 +40,7 @@ const User =(props) =>
         .finally(() => {
             setGotData(true);
         });
-    }, [])
+    }, [userId])
 
     if(!gotData)
     {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { createBrowserHistory as history} from 'history';
-import {NavLink}  from "react-router-dom";
+import {Link, NavLink}  from "react-router-dom";
 import Logo from '../../af_icon.png';
 
 class userNavbar extends React.Component
@@ -19,12 +19,15 @@ class userNavbar extends React.Component
         this.setState({
             searchText: event.target.value
           });
+
+          this.props.updateSearch(event.target.value);
       };
 
       handleSearchSubmit = () => {
         if (this.state.searchText) 
         {
             history().push('/searchFirstnames/' +this.state.searchText)
+            
         } 
         else {
           alert("Please enter some search text!");
@@ -50,16 +53,16 @@ class userNavbar extends React.Component
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <NavLink to={'/'}><Nav.Link >Home</Nav.Link></NavLink>
-                            <NavLink to={'/Dashboard'}><Nav.Link >Dashboard</Nav.Link></NavLink>
-                            <Nav.Link href="/ViewPosts">All Posts</Nav.Link>
+                            <NavLink to='/'><Nav.Link href="/">Home</Nav.Link></NavLink>
+                            <NavLink to='/Dashboard'><Nav.Link href="/Dashboard">Dashboard</Nav.Link></NavLink>
+                            <NavLink to='/ViewPosts'><Nav.Link href="/ViewPosts">All Posts</Nav.Link></NavLink>
                             <Nav.Link href="/NewPost">New Post</Nav.Link>
                             <Nav.Link href="/About">About</Nav.Link>
                             <Nav.Link href="/Logout">Sign Out</Nav.Link>
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.searchInputHandler} value={this.state.searchText}/>
-                            <Button variant="outline-light" type="submit" onClick={this.handleSearchSubmit} >Search</Button>
+                            <Link to="/search"><Button variant="outline-light" type="submit" onClick={this.handleSearchSubmit} >Search</Button></Link>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>

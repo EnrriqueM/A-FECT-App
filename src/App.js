@@ -22,6 +22,7 @@ import SearchFirstnames from './components/SearchResuls/SearchResults.js';
 import SearchUsernames from './components/SearchResuls/SearchUsernames.js';
 import SearchPosts from './components/SearchResuls/SearchPosts.js';
 import User from './components/User/User.js'
+import Search from './components/SearchResuls/Search.js';
 
 
 class App extends React.Component {
@@ -30,7 +31,9 @@ class App extends React.Component {
 
     isLoggedIn: false,
 
-    userSessionId: null
+    userSessionId: null,
+
+    search: "Test"
 
   }
 
@@ -59,18 +62,27 @@ class App extends React.Component {
     }
   }
 
+  updateSearchState = searchString =>
+  {
+    this.setState({search: searchString});
+  }
+
   render() 
   {
     return (
       <div className="App">
-        { this.state.isLoggedIn ? <UserNavbar /> : <Navbar /> }
+        
         
         
         <Router>
+          { this.state.isLoggedIn ? <UserNavbar updateSearch={this.updateSearchState}/> : <Navbar /> }
         
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
+              <Route path="/search" >
+                <Search searchQuery={this.state.search} />
+              </Route>
               <Route path="/searchFirstnames/:query">
                 <SearchFirstnames />
               </Route>

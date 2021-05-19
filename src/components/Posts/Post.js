@@ -20,7 +20,7 @@ class Post extends Component {
                     <div className="app">
                         <div className="post">
                             <div className="user">
-                                <h5 class="user-name"><span className='user-span'>{this.props.user.firstname} {this.props.user.lastname}</span></h5>
+                                <h5 className="user-name"><span className='user-span'>{this.props.user.firstname} {this.props.user.lastname}</span></h5>
                                 <p><span className='user-span'><b>@{this.props.user.username}</b></span></p>
                             </div>
                             <div className="ptitle">

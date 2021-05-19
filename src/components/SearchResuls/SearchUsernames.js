@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, useParams } from "react-router-dom";
 import axios from 'axios';
-import { Form, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import ViewData from './ViewData/ViewData.js';
 import './SearchResults.css';
 
 const SearchUsernames = props =>
 {
-    let { query } = useParams();
     const [data, setData] = useState([]);
     const [recievedData, setRecievedData] = useState(false);
-    const searchFirstnamesUri = "/searchFirstnames/" + query;
-    const searchPostsUri = "/searchPosts/" + query;
 
     useEffect(() =>
     {
-        const searchQuery = query ? query : "";
+        const searchQuery = props.searchQuery;
 
         axios.get('/api/user/searchUsernames?username=' + searchQuery)
         .then(response => {
@@ -41,20 +37,10 @@ const SearchUsernames = props =>
                 console.log(err.response.data);
             }
         })
-    }, [])
+    }, [props.searchQuery])
 
     return(
         <div className="Results">
-             <Form>
-                {['radio'].map((type) => (
-                    <div key={`inline-${type}`} className="mb-3">
-                    <label><a href={searchFirstnamesUri}><Form.Check inline type={type} id={`inline-${type}-1`} />Firstnames</a></label>
-                    <Form.Check inline disabled label="Usernames" type={type} id={`inline-${type}-2`} defaultChecked/>
-                    <label><a href={searchPostsUri}><Form.Check inline type={type} id={`inline-${type}-3`} /> Posts Title</a></label>
-                    
-                    </div>
-                ))}
-            </Form>
             <hr />
             {recievedData ? <ViewData data={data} /> : <Spinner animation="border" variant="primary" /> }
         </div>
