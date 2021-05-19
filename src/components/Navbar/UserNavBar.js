@@ -1,6 +1,8 @@
 import React from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { createBrowserHistory as history} from 'history';
+import {NavLink}  from "react-router-dom";
+import Logo from '../../af_icon.png';
 
 class userNavbar extends React.Component
 {
@@ -38,7 +40,7 @@ class userNavbar extends React.Component
                     <Navbar.Brand href="/">
                         <img
                             alt="AF Logo"
-                            src="https://www.brandcrowd.com/gallery/brands/pictures/picture14869380047255.png"
+                            src={Logo}
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
@@ -48,8 +50,8 @@ class userNavbar extends React.Component
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/Dashboard">Dashboard</Nav.Link>
+                            <NavLink to={'/'}><Nav.Link >Home</Nav.Link></NavLink>
+                            <NavLink to={'/Dashboard'}><Nav.Link >Dashboard</Nav.Link></NavLink>
                             <Nav.Link href="/ViewPosts">All Posts</Nav.Link>
                             <Nav.Link href="/NewPost">New Post</Nav.Link>
                             <Nav.Link href="/About">About</Nav.Link>

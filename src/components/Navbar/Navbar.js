@@ -1,5 +1,6 @@
 import React from 'react'
 import {Navbar, Nav} from 'react-bootstrap';
+import Logo from '../../af_icon.png';
 
 class navbar extends React.Component
 {
@@ -12,7 +13,7 @@ class navbar extends React.Component
                     <Navbar.Brand href="/">
                         <img
                             alt="AF Logo"
-                            src="https://www.brandcrowd.com/gallery/brands/pictures/picture14869380047255.png"
+                            src={Logo}
                             width="30"
                             height="30"
                             className="d-inline-block align-top"

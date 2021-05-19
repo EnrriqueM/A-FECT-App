@@ -26,7 +26,7 @@ const SearchPosts = props =>
                 setData(response.data);
                 setRecievedData(true);
             }
-        })
+        }, [])
         .catch(err => {
 
             //First catch if there wasn't a response
